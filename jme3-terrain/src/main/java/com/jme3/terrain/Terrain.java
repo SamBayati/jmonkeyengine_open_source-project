@@ -1,94 +1,4 @@
-/*
- * Copyright (c) 2009-2021 jMonkeyEngine
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *
- * * Redistributions of source code must retain the above copyright
- *   notice, this list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- *
- * * Neither the name of 'jMonkeyEngine' nor the names of its contributors
- *   may be used to endorse or promote products derived from this software
- *   without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-package com.jme3.terrain;
 
-import com.jme3.material.Material;
-import com.jme3.math.Vector2f;
-import com.jme3.math.Vector3f;
-import java.util.List;
-
-/**
- * Terrain can be one or many meshes comprising a (probably large) piece of land.
- * Terrain is Y-up in the grid axis, meaning gravity acts in the -Y direction.
- * Level of Detail (LOD) is supported and expected as terrains can get very large. LOD can
- * also be disabled if you so desire, however some terrain implementations can choose to ignore
- * useLOD(boolean).
- * Terrain implementations should extend Node, or at least Spatial.
- *
- * @author bowens
- */
-public interface Terrain {
-
-    /**
-     * Get the real-world height of the terrain at the specified X-Z coordinate.
-     * @param xz the X-Z world coordinate
-     * @return the height at the given point
-     */
-    public float getHeight(Vector2f xz);
-    
-    /**
-     * Get the normal vector for the surface of the terrain at the specified
-     * X-Z coordinate. This normal vector can be a close approximation. It does not
-     * take into account any normal maps on the material.
-     * @param xz the X-Z world coordinate
-     * @return the normal vector at the given point
-     */
-    public Vector3f getNormal(Vector2f xz);
-
-    /**
-     * Get the heightmap height at the specified X-Z coordinate. This does not
-     * count scaling and snaps the XZ coordinate to the nearest (rounded) heightmap grid point.
-     * @param xz world coordinate
-     * @return the height, unscaled and uninterpolated
-     */
-    public float getHeightmapHeight(Vector2f xz);
-
-    /**
-     * Set the height at the specified X-Z coordinate.
-     * To set the height of the terrain and see it, you will have
-     * to unlock the terrain meshes by calling terrain.setLocked(false) before
-     * you call setHeight().
-     * @param xzCoordinate coordinate to set the height
-     * @param height that will be set at the coordinate
-     */
-    public void setHeight(Vector2f xzCoordinate, float height);
-
-    /**
-     * Set the height at many points. The two lists must be the same size.
-     * Each xz coordinate entry matches to a height entry, 1 for 1. So the 
-     * first coordinate matches to the first height value, the last to the 
-     * last etc.
-     * @param xz a list of coordinates where the height will be set
-     * @param height the heights that match the xz coordinates
      */
     public void setHeight(List<Vector2f> xz, List<Float> height);
 
@@ -195,3 +105,4 @@ public interface Terrain {
      */
     public int getNumMajorSubdivisions();
 }
+
