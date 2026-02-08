@@ -71,38 +71,3 @@
      * @param worldLocation the location, in world coordinates, of where 
      * we are interested in the underlying texture.
      */
-    public Material getMaterial(Vector3f worldLocation);
-
-    /**
-     * Used for painting to get the number of vertices along the edge of the
-     * terrain.
-     * This is an un-scaled size, and should represent the vertex count (i.e. the
-     * texture coord count) along an edge of a square terrain.
-     * 
-     * In the standard TerrainQuad default implementation, this will return
-     * the "totalSize" of the terrain (512 or so).
-     */
-    public int getTerrainSize();
-
-    /*
-     * Get the scale of the texture coordinates. Normally if the texture is
-     * laid on the terrain and not scaled so that the texture does not repeat,
-     * then each texture coordinate (on a vertex) will be 1/(terrain size).
-     * That is: the coverage between each consecutive texture coordinate will
-     * be a percentage of the total terrain size.
-     * So if the terrain is 512 vertexes wide, then each texture coord will cover
-     * 1/512 (or 0.00195) percent of the texture.
-     * This is used for converting between tri-planar texture scales and regular
-     * texture scales.
-     * 
-     * not needed
-     */
-    //public float getTextureCoordinateScale();
-    
-    /**
-     * 
-     * 
-     */
-    public int getNumMajorSubdivisions();
-}
-
